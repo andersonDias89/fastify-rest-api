@@ -1,25 +1,32 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+// Configuração do gerador do cliente Prisma
 generator client {
+  // Especifica que o provedor é o cliente JavaScript do Prisma
   provider = "prisma-client-js"
+  // Define o diretório de saída onde o cliente será gerado
   output   = "../src/generated/prisma"
 }
 
+// Configuração da fonte de dados (banco de dados)
 datasource db {
+  // Especifica que o provedor é SQLite
   provider = "sqlite"
+  // URL de conexão com o banco (definida em variável de ambiente)
   url      = env("DATABASE_URL")
 }
 
+// Modelo que representa a tabela de usuários no banco de dados
 model User {
+  // Campo id: string único que serve como chave primária, com valor padrão UUID
   id        String   @id @default(uuid())
+  // Campo name: string obrigatório para o nome do usuário
   name      String
+  // Campo email: string único (não pode haver emails duplicados)
   email     String   @unique
+  // Campo createdAt: data/hora de criação, com valor padrão da data atual
   createdAt DateTime @default(now())
+  // Campo updatedAt: data/hora de atualização, atualizada automaticamente
   updatedAt DateTime @updatedAt
 
+  // Mapeia o modelo para a tabela "users" no banco de dados
   @@map("users")
 }
