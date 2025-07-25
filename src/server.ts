@@ -1,12 +1,12 @@
-import fastify from "fastify";
+import Fastify, { FastifyInstance } from 'fastify'
 
-const app = fastify();
+const fastify: FastifyInstance = Fastify({ logger: true })
 
-app.get("/", (req, reply) => {
+fastify.get("/", (req, reply) => {
   reply.send("Hello World");
 });
 
-app.listen({ port: 3000 }, (err, address) => {
+fastify.listen({ port: 3000 }, (err, address) => {
   if (err) {
     console.error(err);
     process.exit(1);
@@ -14,4 +14,4 @@ app.listen({ port: 3000 }, (err, address) => {
   console.log(`Server is running on ${address}`);
 });
 
-export default app;
+export default fastify;
