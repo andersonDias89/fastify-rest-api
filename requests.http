@@ -1,3 +1,12 @@
 ### Requisição GET para listar usuários
 GET http://localhost:3333/users
 Accept: application/json
+
+### Requisição POST para criar um usuário
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+  "name": "João Silva",
+  "email": "joao.silva@email.com"
+}
