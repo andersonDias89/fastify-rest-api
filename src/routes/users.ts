@@ -10,9 +10,9 @@ export async function usersRoutes(fastify: FastifyInstance) {
 
       // Esquema de validação com zod
       const userSchema = z.object({
-        id: z.string().uuid(),
+        id: z.string().regex(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i),
         name: z.string(),
-        email: z.string().email(),
+        email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email inválido"),
         createdAt: z.date(),
         updatedAt: z.date(),
       });
@@ -43,7 +43,7 @@ export async function usersRoutes(fastify: FastifyInstance) {
     try {
       const createUserSchema = z.object({
         name: z.string().min(1),
-        email: z.string().email(),
+        email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email inválido"),
       });
 
       const { name, email } = createUserSchema.parse(request.body);
