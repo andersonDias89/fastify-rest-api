@@ -1,10 +1,12 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import { usersRoutes } from './routes/users.js'
+import { createUserRoutes } from './routes/createUserRoutes.js'
+import { listUserRoutes } from './routes/listUserRoutes.js'
 
 const fastify: FastifyInstance = Fastify({ logger: true })
 
-// Registra as rotas
-fastify.register(usersRoutes)
+// Registra as rotas separadas por método
+fastify.register(createUserRoutes)
+fastify.register(listUserRoutes)
 
 fastify.get("/", (req, reply) => {
   reply.send("Hello World");

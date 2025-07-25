@@ -1,27 +1,14 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { IUserService } from "../interfaces/IUserService.js";
-import { CreateUser } from "../schemas/UserSchema.js";
+import { ICreateUserService } from "../interfaces/ICreateUserService.js";
+import { CreateUser } from "../schemas/CreateUserSchema.js";
 
-export class UserController {
-  constructor(private userService: IUserService) {}
-
-  async listUsers(reply: FastifyReply): Promise<void> {
-    try {
-      const users = await this.userService.listUsers();
-      reply.send(users);
-    } catch (error) {
-      console.error("Erro ao buscar usuários:", error);
-      reply.status(500).send({
-        message: "Erro interno do servidor",
-        error: error instanceof Error ? error.message : "Erro desconhecido"
-      });
-    }
-  }
+export class CreateUserController {
+  constructor(private createUserService: ICreateUserService) {}
 
   async createUser(request: FastifyRequest<{ Body: CreateUser }>, reply: FastifyReply): Promise<void> {
     try {
       const userData = request.body;
-      const user = await this.userService.createUser(userData);
+      const user = await this.createUserService.createUser(userData);
       reply.status(201).send(user);
     } catch (error) {
       console.error("Erro ao criar usuário:", error);

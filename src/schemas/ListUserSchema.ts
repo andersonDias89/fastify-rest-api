@@ -8,13 +8,7 @@ export const UserSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const CreateUserSchema = z.object({
-  name: z.string().min(1, "Nome é obrigatório"),
-  email: z.string().email("Email inválido"),
-});
-
 export const UsersListSchema = z.array(UserSchema);
 
 export type User = z.infer<typeof UserSchema>;
-export type CreateUser = z.infer<typeof CreateUserSchema>;
 export type UsersList = z.infer<typeof UsersListSchema>; 
