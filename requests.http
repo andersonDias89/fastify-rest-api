@@ -1,0 +1,3 @@
+### Requisição GET para listar usuários
+GET http://localhost:3333/users
+Accept: application/json
