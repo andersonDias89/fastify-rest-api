@@ -1,3 +1,5 @@
+import { User } from "../schemas/UserSchema.js";
+
 export interface IUserRepository {
-  findAll(): Promise<any[]>;
+  findAll(): Promise<User[]>;
 } 
